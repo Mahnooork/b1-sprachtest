@@ -23,6 +23,7 @@
             --accent-red: #e74c3c;
             --accent-green: #2ecc71;
             --accent-blue: #5dade2;
+            --accent-purple: #9b59b6;
             --text-primary: #f5f5f5;
             --text-secondary: #a0a0b0;
             --text-dim: #606070;
@@ -34,17 +35,8 @@
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html, body {
-            height: 100%;
-            overscroll-behavior: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html, body { height: 100%; overscroll-behavior: none; }
 
         body {
             font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -57,761 +49,234 @@
             padding-bottom: var(--safe-bottom);
         }
 
-        /* Background */
         .bg-pattern {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.4;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; opacity: 0.4;
             background-image: 
                 radial-gradient(ellipse 800px 600px at 20% 10%, rgba(212,168,83,0.08) 0%, transparent 50%),
                 radial-gradient(ellipse 600px 400px at 80% 80%, rgba(212,168,83,0.05) 0%, transparent 50%);
         }
 
-        /* Header */
         header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: sticky; top: 0; z-index: 100; padding: 1rem;
+            display: flex; justify-content: space-between; align-items: center;
             background: rgba(10,10,15,0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-subtle);
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-gold);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: var(--bg-primary);
+            width: 40px; height: 40px; background: var(--gradient-gold); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'DM Serif Display', serif; font-size: 1.1rem; font-weight: bold; color: var(--bg-primary);
         }
+        .logo-text { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-primary); }
+        .logo-text span { color: var(--accent-gold); }
 
-        .logo-text {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-        }
+        .header-stats { display: flex; gap: 1rem; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1rem; font-weight: 600; color: var(--accent-gold); }
+        .stat-label { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; }
 
-        .logo-text span {
-            color: var(--accent-gold);
-        }
+        .container { position: relative; z-index: 10; max-width: 800px; margin: 0 auto; padding: 0 1rem 100px; }
 
-        .header-stats {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--accent-gold);
-        }
-
-        .stat-label {
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-        }
-
-        /* Container */
-        .container {
-            position: relative;
-            z-index: 10;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 1rem 100px;
-        }
-
-        /* Bottom Navigation */
         .nav-tabs {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            background: rgba(18,18,26,0.98);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-subtle);
-            padding-bottom: var(--safe-bottom);
-            z-index: 1000;
+            position: fixed; bottom: 0; left: 0; right: 0; display: flex;
+            background: rgba(18,18,26,0.98); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-subtle); padding-bottom: var(--safe-bottom); z-index: 1000;
         }
-
         .nav-tab {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.75rem 0.5rem;
-            background: none;
-            border: none;
-            color: var(--text-dim);
-            font-size: 0.65rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
+            padding: 0.75rem 0.5rem; background: none; border: none;
+            color: var(--text-dim); font-size: 0.65rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease;
         }
+        .nav-tab svg { width: 22px; height: 22px; }
+        .nav-tab.active { color: var(--accent-gold); }
 
-        .nav-tab svg {
-            width: 22px;
-            height: 22px;
-        }
+        .section { display: none; padding-top: 1rem; }
+        .section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .nav-tab.active {
-            color: var(--accent-gold);
-        }
-
-        /* Sections */
-        .section {
-            display: none;
-            padding-top: 1rem;
-        }
-
-        .section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
+            background: var(--bg-card); border: 1px solid var(--border-subtle);
+            border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem;
         }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .card-title { font-family: 'DM Serif Display', serif; font-size: 1.25rem; }
+        .card-badge { background: rgba(212,168,83,0.15); color: var(--accent-gold); padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+        .progress-container { margin-bottom: 1rem; }
+        .progress-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .progress-label { font-size: 0.85rem; color: var(--text-secondary); }
+        .progress-value { font-size: 0.85rem; color: var(--accent-gold); font-weight: 600; }
+        .progress-bar { height: 8px; background: var(--bg-secondary); border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--gradient-gold); border-radius: 10px; transition: width 0.5s ease; }
 
-        .card-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.25rem;
-        }
-
-        .card-badge {
-            background: rgba(212,168,83,0.15);
-            color: var(--accent-gold);
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* Progress */
-        .progress-container {
-            margin-bottom: 1rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .progress-value {
-            font-size: 0.85rem;
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--gradient-gold);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        /* Skill Grid */
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
+        .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         .skill-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
+            background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 14px;
+            padding: 1.25rem; cursor: pointer; transition: all 0.3s ease; text-align: center;
         }
+        .skill-card:hover, .skill-card:active { border-color: var(--accent-gold); transform: translateY(-2px); }
+        .skill-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .skill-name { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.95rem; }
+        .skill-desc { font-size: 0.75rem; color: var(--text-dim); }
 
-        .skill-card:hover, .skill-card:active {
-            border-color: var(--accent-gold);
-            transform: translateY(-2px);
-        }
-
-        .skill-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .skill-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            font-size: 0.95rem;
-        }
-
-        .skill-desc {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-        }
-
-        /* Buttons */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.9rem 1.5rem;
-            border-radius: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: var(--gradient-gold);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-subtle);
-        }
-
-        .btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        /* Quiz */
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .quiz-progress-bar {
-            flex: 1;
-            min-width: 150px;
-            height: 6px;
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .quiz-progress-fill {
-            height: 100%;
-            background: var(--accent-gold);
-            transition: width 0.3s ease;
-        }
-
-        .quiz-timer {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .quiz-timer.warning {
-            color: var(--accent-red);
-        }
-
-        .quiz-context {
-            background: var(--bg-secondary);
-            padding: 1.25rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--accent-gold);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .quiz-question {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1.25rem;
-            line-height: 1.5;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .quiz-option {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-            text-align: left;
-        }
-
-        .quiz-option:active {
-            transform: scale(0.99);
-        }
-
-        .quiz-option.selected {
-            border-color: var(--accent-gold);
-            background: rgba(212,168,83,0.1);
-        }
-
-        .quiz-option.correct {
-            border-color: var(--accent-green);
-            background: rgba(46,204,113,0.15);
-        }
-
-        .quiz-option.incorrect {
-            border-color: var(--accent-red);
-            background: rgba(231,76,60,0.15);
-        }
-
-        .quiz-explanation {
-            background: rgba(93,173,226,0.1);
-            border: 1px solid rgba(93,173,226,0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--accent-blue);
-            line-height: 1.5;
-        }
-
-        /* Vocabulary Cards */
-        .vocab-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-
-        .vocab-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .vocab-card:active {
-            transform: scale(0.98);
-        }
-
-        .vocab-card.flipped {
-            background: rgba(212,168,83,0.1);
-            border-color: var(--accent-gold);
-        }
-
-        .vocab-word {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .vocab-article {
-            color: var(--accent-gold);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .vocab-translation {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-        }
-
-        .vocab-example {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            font-style: italic;
-            margin-top: 0.5rem;
-            line-height: 1.4;
-        }
-
-        /* Category Filter */
-        .category-filter {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            overflow-x: auto;
-            padding-bottom: 0.5rem;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .category-btn {
-            padding: 0.5rem 1rem;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 20px;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            cursor: pointer;
-            white-space: nowrap;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
-        }
-
-        .category-btn.active {
-            background: var(--accent-gold);
-            border-color: var(--accent-gold);
-            color: var(--bg-primary);
-        }
-
-        /* Grammar */
-        .grammar-topics {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .grammar-topic {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .grammar-topic:active {
-            transform: scale(0.99);
-            border-color: var(--accent-gold);
-        }
-
-        .grammar-topic-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .grammar-topic-desc {
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-top: 0.25rem;
-        }
-
-        .grammar-topic-arrow {
-            color: var(--accent-gold);
-            font-size: 1.2rem;
-        }
-
-        .grammar-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-        }
-
-        .grammar-table th,
-        .grammar-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .grammar-table th {
-            background: var(--bg-secondary);
-            color: var(--accent-gold);
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        /* Writing & Speaking */
-        .prompt-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .prompt-type {
-            color: var(--accent-gold);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .prompt-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .prompt-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .tips-box {
-            background: rgba(93,173,226,0.1);
-            border: 1px solid rgba(93,173,226,0.2);
-            border-radius: 12px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        .tips-title {
-            color: var(--accent-blue);
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tips-list {
-            list-style: none;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .tips-list li {
-            padding: 0.25rem 0;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .tips-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-        }
-
-        /* Results */
-        .results-container {
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        .results-score-circle {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 1.5rem;
-            border-radius: 50%;
-            background: conic-gradient(
-                var(--accent-gold) var(--score-percent),
-                var(--bg-secondary) var(--score-percent)
-            );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .results-score-inner {
-            width: 130px;
-            height: 130px;
-            background: var(--bg-card);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .results-score-value {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-        }
-
-        .results-score-label {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-        }
-
-        .results-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .results-message {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-        }
-
-        /* Start Screen */
-        .start-screen {
-            text-align: center;
-            padding: 3rem 1rem;
-        }
-
-        .start-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .start-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 1.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .start-desc {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Install Banner */
-        .install-banner {
-            background: linear-gradient(135deg, rgba(212,168,83,0.2) 0%, rgba(212,168,83,0.05) 100%);
-            border: 1px solid var(--border-gold);
-            border-radius: 14px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: none;
-        }
-
-        .install-banner.show {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .install-banner-text {
-            flex: 1;
-        }
-
-        .install-banner-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .install-banner-desc {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .install-btn {
-            padding: 0.6rem 1rem;
-            background: var(--accent-gold);
-            color: var(--bg-primary);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-
-        .install-close {
-            background: none;
-            border: none;
-            color: var(--text-dim);
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.9rem 1.5rem; border-radius: 12px; font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: none; width: 100%;
+        }
+        .btn-primary { background: var(--gradient-gold); color: var(--bg-primary); }
+        .btn-primary:active { transform: scale(0.98); }
+        .btn-secondary { background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-subtle); }
+        .btn svg { width: 18px; height: 18px; }
+        .btn-row { display: flex; gap: 0.75rem; margin-top: 1rem; }
+
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
+        .quiz-progress-bar { flex: 1; min-width: 150px; height: 6px; background: var(--bg-secondary); border-radius: 10px; overflow: hidden; }
+        .quiz-progress-fill { height: 100%; background: var(--accent-gold); transition: width 0.3s ease; }
+        .quiz-timer { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--text-secondary); font-size: 0.9rem; }
+        .quiz-timer.warning { color: var(--accent-red); }
+
+        .quiz-context { background: var(--bg-secondary); padding: 1.25rem; border-radius: 12px; border-left: 4px solid var(--accent-gold); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.7; }
+        .quiz-question { font-size: 1.1rem; font-weight: 500; margin-bottom: 1.25rem; line-height: 1.5; }
+        .quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .quiz-option { background: var(--bg-secondary); border: 2px solid var(--border-subtle); border-radius: 12px; padding: 1rem 1.25rem; cursor: pointer; transition: all 0.2s ease; font-size: 0.95rem; text-align: left; }
+        .quiz-option:active { transform: scale(0.99); }
+        .quiz-option.correct { border-color: var(--accent-green); background: rgba(46,204,113,0.15); }
+        .quiz-option.incorrect { border-color: var(--accent-red); background: rgba(231,76,60,0.15); }
+        .quiz-explanation { background: rgba(93,173,226,0.1); border: 1px solid rgba(93,173,226,0.3); border-radius: 12px; padding: 1rem; margin-top: 1rem; font-size: 0.9rem; color: var(--accent-blue); line-height: 1.5; }
+
+        .vocab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+        .vocab-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem; cursor: pointer; transition: all 0.3s ease; min-height: 120px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+        .vocab-card:active { transform: scale(0.98); }
+        .vocab-card.flipped { background: rgba(212,168,83,0.1); border-color: var(--accent-gold); }
+        .vocab-word { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.35rem; }
+        .vocab-article { color: var(--accent-gold); font-size: 0.8rem; font-weight: 600; }
+        .vocab-translation { color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; }
+        .vocab-example { font-size: 0.8rem; color: var(--text-dim); font-style: italic; margin-top: 0.5rem; line-height: 1.4; }
+
+        .category-filter { display: flex; gap: 0.5rem; margin-bottom: 1rem; overflow-x: auto; padding-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
+        .category-btn { padding: 0.5rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 20px; color: var(--text-secondary); font-size: 0.8rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all 0.2s ease; }
+        .category-btn.active { background: var(--accent-gold); border-color: var(--accent-gold); color: var(--bg-primary); }
+
+        .grammar-topics { display: flex; flex-direction: column; gap: 0.75rem; }
+        .grammar-topic { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem; cursor: pointer; transition: all 0.2s ease; display: flex; justify-content: space-between; align-items: center; }
+        .grammar-topic:active { transform: scale(0.99); border-color: var(--accent-gold); }
+        .grammar-topic-title { font-weight: 600; font-size: 0.95rem; }
+        .grammar-topic-desc { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+        .grammar-topic-arrow { color: var(--accent-gold); font-size: 1.2rem; }
+
+        .grammar-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+        .grammar-table th, .grammar-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+        .grammar-table th { background: var(--bg-secondary); color: var(--accent-gold); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
+
+        .prompt-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
+        .prompt-type { color: var(--accent-gold); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .prompt-title { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 0.75rem; }
+        .prompt-text { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+        .tips-box { background: rgba(93,173,226,0.1); border: 1px solid rgba(93,173,226,0.2); border-radius: 12px; padding: 1rem; margin-top: 1rem; }
+        .tips-title { color: var(--accent-blue); font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tips-list { list-style: none; font-size: 0.85rem; color: var(--text-secondary); }
+        .tips-list li { padding: 0.25rem 0; padding-left: 1rem; position: relative; }
+        .tips-list li::before { content: "•"; position: absolute; left: 0; color: var(--accent-blue); }
+
+        .results-container { text-align: center; padding: 2rem 0; }
+        .results-score-circle { width: 160px; height: 160px; margin: 0 auto 1.5rem; border-radius: 50%; background: conic-gradient(var(--accent-gold) var(--score-percent), var(--bg-secondary) var(--score-percent)); display: flex; align-items: center; justify-content: center; }
+        .results-score-inner { width: 130px; height: 130px; background: var(--bg-card); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .results-score-value { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--accent-gold); }
+        .results-score-label { color: var(--text-secondary); font-size: 0.8rem; }
+        .results-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-bottom: 0.75rem; }
+        .results-message { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        .start-screen { text-align: center; padding: 3rem 1rem; }
+        .start-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .start-title { font-family: 'DM Serif Display', serif; font-size: 1.75rem; margin-bottom: 0.75rem; }
+        .start-desc { color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6; }
+
+        .install-banner { background: linear-gradient(135deg, rgba(212,168,83,0.2) 0%, rgba(212,168,83,0.05) 100%); border: 1px solid var(--border-gold); border-radius: 14px; padding: 1rem; margin-bottom: 1rem; display: none; }
+        .install-banner.show { display: flex; align-items: center; gap: 1rem; }
+        .install-banner-text { flex: 1; }
+        .install-banner-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .install-banner-desc { font-size: 0.8rem; color: var(--text-secondary); }
+        .install-btn { padding: 0.6rem 1rem; background: var(--accent-gold); color: var(--bg-primary); border: none; border-radius: 8px; font-weight: 600; font-size: 0.8rem; cursor: pointer; }
+        .install-close { background: none; border: none; color: var(--text-dim); font-size: 1.2rem; cursor: pointer; padding: 0.5rem; }
 
         .hidden { display: none !important; }
+        .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; background: none; border: none; color: var(--accent-gold); font-size: 0.9rem; cursor: pointer; margin-bottom: 1rem; }
+        .back-btn svg { width: 18px; height: 18px; }
 
-        /* Grammar detail back button */
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            background: none;
-            border: none;
-            color: var(--accent-gold);
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 1rem;
-        }
+        /* ==================== ENHANCED SPEAKING STYLES ==================== */
+        .speaking-mode-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+        .speaking-mode-card { background: var(--bg-secondary); border: 2px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem; cursor: pointer; transition: all 0.2s ease; text-align: center; }
+        .speaking-mode-card:active, .speaking-mode-card:hover { border-color: var(--accent-gold); }
+        .speaking-mode-card.active { border-color: var(--accent-gold); background: rgba(212,168,83,0.1); }
+        .speaking-mode-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .speaking-mode-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .speaking-mode-desc { font-size: 0.75rem; color: var(--text-dim); }
 
-        .back-btn svg {
-            width: 18px;
-            height: 18px;
-        }
+        .mic-container { display: flex; flex-direction: column; align-items: center; padding: 2rem 0; }
+        .mic-button { width: 120px; height: 120px; border-radius: 50%; background: var(--bg-secondary); border: 3px solid var(--border-subtle); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; position: relative; }
+        .mic-button svg { width: 48px; height: 48px; color: var(--text-secondary); transition: all 0.3s ease; }
+        .mic-button:hover { border-color: var(--accent-gold); }
+        .mic-button:hover svg { color: var(--accent-gold); }
+        .mic-button.recording { border-color: var(--accent-red); background: rgba(231,76,60,0.1); animation: pulse 1.5s infinite; }
+        .mic-button.recording svg { color: var(--accent-red); }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0.4); } 50% { box-shadow: 0 0 0 20px rgba(231,76,60,0); } }
+
+        .mic-status { margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary); text-align: center; }
+        .mic-status.recording { color: var(--accent-red); font-weight: 600; }
+
+        .transcript-box { background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1.25rem; margin-top: 1.5rem; min-height: 100px; }
+        .transcript-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .transcript-text { font-size: 1rem; line-height: 1.6; color: var(--text-primary); min-height: 60px; }
+        .transcript-text.placeholder { color: var(--text-dim); font-style: italic; }
+        .transcript-text .interim { color: var(--text-dim); }
+
+        .feedback-box { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem; margin-top: 1rem; }
+        .feedback-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .feedback-title { font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+        .feedback-score { background: var(--accent-gold); color: var(--bg-primary); padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; }
+        .feedback-score.good { background: var(--accent-green); }
+        .feedback-score.medium { background: var(--accent-gold); }
+        .feedback-score.poor { background: var(--accent-red); }
+
+        .feedback-section { margin-bottom: 1rem; }
+        .feedback-section:last-child { margin-bottom: 0; }
+        .feedback-section-title { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .feedback-item { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.35rem; }
+        .feedback-item.positive { color: var(--accent-green); }
+        .feedback-item.negative { color: var(--accent-red); }
+        .feedback-item.suggestion { color: var(--accent-blue); }
+
+        .word-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .word-chip { background: var(--bg-secondary); border: 1px solid var(--border-subtle); padding: 0.35rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .word-chip.found { background: rgba(46,204,113,0.15); border-color: var(--accent-green); color: var(--accent-green); }
+        .word-chip.missing { background: rgba(231,76,60,0.1); border-color: var(--accent-red); color: var(--accent-red); }
+
+        .speaking-task-card { background: linear-gradient(135deg, rgba(212,168,83,0.15) 0%, rgba(212,168,83,0.05) 100%); border: 1px solid var(--border-gold); border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
+        .speaking-task-number { font-size: 0.75rem; color: var(--accent-gold); font-weight: 600; margin-bottom: 0.5rem; }
+        .speaking-task-text { font-size: 1.1rem; font-weight: 500; line-height: 1.5; }
+
+        .speech-not-supported { background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3); border-radius: 12px; padding: 1.25rem; text-align: center; color: var(--accent-red); }
+
+        .speaking-progress { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; }
+        .speaking-progress-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-secondary); border: 2px solid var(--border-subtle); }
+        .speaking-progress-dot.completed { background: var(--accent-green); border-color: var(--accent-green); }
+        .speaking-progress-dot.current { background: var(--accent-gold); border-color: var(--accent-gold); }
+
+        .repeat-word-display { text-align: center; padding: 2rem; }
+        .repeat-word-main { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .repeat-word-translation { color: var(--text-secondary); font-size: 1rem; }
+
+        .comparison-result { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 1rem; border-radius: 12px; margin-top: 1rem; }
+        .comparison-result.correct { background: rgba(46,204,113,0.15); color: var(--accent-green); }
+        .comparison-result.incorrect { background: rgba(231,76,60,0.15); color: var(--accent-red); }
+        .comparison-result-icon { font-size: 1.5rem; }
+        .comparison-result-text { font-weight: 600; }
     </style>
 </head>
 <body>
@@ -835,7 +300,6 @@
     </header>
 
     <div class="container">
-        <!-- Install Banner -->
         <div class="install-banner" id="installBanner">
             <div class="install-banner-text">
                 <div class="install-banner-title">📱 App installieren</div>
@@ -853,47 +317,25 @@
                     <span class="card-badge">B1 Niveau</span>
                 </div>
                 <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="progress-label">Lesen</span>
-                        <span class="progress-value" id="readingProgress">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="readingBar" style="width: 0%"></div>
-                    </div>
+                    <div class="progress-header"><span class="progress-label">Lesen</span><span class="progress-value" id="readingProgress">0%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="readingBar" style="width: 0%"></div></div>
                 </div>
                 <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="progress-label">Hören</span>
-                        <span class="progress-value" id="listeningProgress">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="listeningBar" style="width: 0%"></div>
-                    </div>
+                    <div class="progress-header"><span class="progress-label">Hören</span><span class="progress-value" id="listeningProgress">0%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="listeningBar" style="width: 0%"></div></div>
                 </div>
                 <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="progress-label">Schreiben</span>
-                        <span class="progress-value" id="writingProgress">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="writingBar" style="width: 0%"></div>
-                    </div>
+                    <div class="progress-header"><span class="progress-label">Schreiben</span><span class="progress-value" id="writingProgress">0%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="writingBar" style="width: 0%"></div></div>
                 </div>
                 <div class="progress-container">
-                    <div class="progress-header">
-                        <span class="progress-label">Sprechen</span>
-                        <span class="progress-value" id="speakingProgress">0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="speakingBar" style="width: 0%"></div>
-                    </div>
+                    <div class="progress-header"><span class="progress-label">Sprechen</span><span class="progress-value" id="speakingProgress">0%</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="speakingBar" style="width: 0%"></div></div>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Schnellstart</h3>
-                </div>
+                <div class="card-header"><h3 class="card-title">Schnellstart</h3></div>
                 <div class="skill-grid">
                     <div class="skill-card" onclick="startPractice('reading')">
                         <div class="skill-icon">📖</div>
@@ -913,15 +355,13 @@
                     <div class="skill-card" onclick="startPractice('speaking')">
                         <div class="skill-icon">🗣️</div>
                         <div class="skill-name">Sprechen</div>
-                        <div class="skill-desc">Gespräche führen</div>
+                        <div class="skill-desc">Mit Spracherkennung</div>
                     </div>
                 </div>
             </div>
 
             <button class="btn btn-primary" onclick="startMixedPractice()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 Gemischte Übung starten
             </button>
         </section>
@@ -933,34 +373,23 @@
                 <h2 class="start-title">Bereit zum Üben?</h2>
                 <p class="start-desc">Wähle eine Übung aus dem Dashboard oder starte eine gemischte Übung.</p>
                 <button class="btn btn-primary" onclick="startMixedPractice()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     Jetzt üben
                 </button>
             </div>
 
             <div id="quizContent" class="hidden">
                 <div class="quiz-header">
-                    <div class="quiz-progress-bar">
-                        <div class="quiz-progress-fill" id="quizProgressFill"></div>
-                    </div>
+                    <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
                     <div class="quiz-timer" id="quizTimer">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         <span id="timerDisplay">10:00</span>
                     </div>
                 </div>
                 <div id="questionContainer"></div>
                 <div class="btn-row">
                     <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuestion()">
-                        Weiter
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                            <polyline points="12 5 19 12 12 19"/>
-                        </svg>
+                        Weiter <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </button>
                 </div>
             </div>
@@ -975,12 +404,8 @@
                 <h2 class="results-title" id="resultsTitle">Super gemacht!</h2>
                 <p class="results-message" id="resultsMessage">Du machst tolle Fortschritte.</p>
                 <div class="btn-row">
-                    <button class="btn btn-secondary" onclick="goToDashboard()">
-                        Übersicht
-                    </button>
-                    <button class="btn btn-primary" onclick="startMixedPractice()">
-                        Nochmal
-                    </button>
+                    <button class="btn btn-secondary" onclick="goToDashboard()">Übersicht</button>
+                    <button class="btn btn-primary" onclick="startMixedPractice()">Nochmal</button>
                 </div>
             </div>
 
@@ -1004,9 +429,7 @@
         <section class="section" id="grammar">
             <div id="grammarList">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Grammatik B1</h3>
-                    </div>
+                    <div class="card-header"><h3 class="card-title">Grammatik B1</h3></div>
                     <div class="grammar-topics" id="grammarTopics"></div>
                 </div>
             </div>
@@ -1016,36 +439,19 @@
 
     <nav class="nav-tabs">
         <button class="nav-tab active" data-section="dashboard">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
             Übersicht
         </button>
         <button class="nav-tab" data-section="practice">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             Üben
         </button>
         <button class="nav-tab" data-section="vocabulary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
             Wörter
         </button>
         <button class="nav-tab" data-section="grammar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="4" y1="9" x2="20" y2="9"/>
-                <line x1="4" y1="15" x2="20" y2="15"/>
-                <line x1="10" y1="3" x2="8" y2="21"/>
-                <line x1="16" y1="3" x2="14" y2="21"/>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
             Grammatik
         </button>
     </nav>
@@ -1057,46 +463,17 @@
         const installBtn = document.getElementById('installBtn');
         const installClose = document.getElementById('installClose');
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            installBanner.classList.add('show');
-        });
-
-        installBtn?.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                installBanner.classList.remove('show');
-            }
-        });
-
-        installClose?.addEventListener('click', () => {
-            installBanner.classList.remove('show');
-        });
-
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(console.error);
-        }
+        window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; installBanner.classList.add('show'); });
+        installBtn?.addEventListener('click', async () => { if (deferredPrompt) { deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; installBanner.classList.remove('show'); } });
+        installClose?.addEventListener('click', () => { installBanner.classList.remove('show'); });
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js').catch(console.error); }
 
         // ==================== STATE ====================
-        let stats = JSON.parse(localStorage.getItem('b1Stats')) || {
-            score: 0,
-            streak: 0,
-            lastDate: null,
-            skills: { reading: 0, listening: 0, writing: 0, speaking: 0 }
-        };
+        let stats = JSON.parse(localStorage.getItem('b1Stats')) || { score: 0, streak: 0, lastDate: null, skills: { reading: 0, listening: 0, writing: 0, speaking: 0 } };
+        let currentQuestions = [], currentQuestionIndex = 0, correctAnswers = 0, totalQuestions = 0, selectedAnswer = null, timerInterval = null, timeRemaining = 600, currentSkill = 'mixed';
 
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let correctAnswers = 0;
-        let totalQuestions = 0;
-        let selectedAnswer = null;
-        let timerInterval = null;
-        let timeRemaining = 600;
-        let currentSkill = 'mixed';
+        // Speech Recognition
+        let recognition = null, isRecording = false, finalTranscript = '', interimTranscript = '', speechSupported = false;
 
         // ==================== DATA ====================
         const vocabulary = [
@@ -1127,222 +504,386 @@
         ];
 
         const grammarData = {
-            konjunktivII: {
-                title: "Konjunktiv II - Irreale Wünsche & Höflichkeit",
-                explanation: "Der Konjunktiv II drückt irreale Situationen, Wünsche und höfliche Bitten aus.",
-                table: [
-                    { infinitiv: "sein", präteritum: "war", konjunktivII: "wäre", beispiel: "Wenn ich reich wäre..." },
-                    { infinitiv: "haben", präteritum: "hatte", konjunktivII: "hätte", beispiel: "Ich hätte gern einen Kaffee." },
-                    { infinitiv: "können", präteritum: "konnte", konjunktivII: "könnte", beispiel: "Könnten Sie mir helfen?" },
-                    { infinitiv: "müssen", präteritum: "musste", konjunktivII: "müsste", beispiel: "Ich müsste mehr lernen." },
-                    { infinitiv: "werden", präteritum: "wurde", konjunktivII: "würde", beispiel: "Ich würde gern kommen." }
-                ],
-                tips: [
-                    "würde + Infinitiv: bei den meisten Verben",
-                    "Bei sein, haben und Modalverben: eigene Konjunktiv-II-Form",
-                    "Höfliche Bitten: Könnten Sie...? / Würden Sie...?"
-                ]
-            },
-            passiv: {
-                title: "Passiv - Vorgangs- und Zustandspassiv",
-                explanation: "Das Passiv betont die Handlung, nicht den Handelnden.",
-                table: [
-                    { zeit: "Präsens", aktiv: "Man baut das Haus.", passiv: "Das Haus wird gebaut." },
-                    { zeit: "Präteritum", aktiv: "Man baute das Haus.", passiv: "Das Haus wurde gebaut." },
-                    { zeit: "Perfekt", aktiv: "Man hat das Haus gebaut.", passiv: "Das Haus ist gebaut worden." },
-                    { zeit: "Zustandspassiv", aktiv: "-", passiv: "Das Haus ist gebaut." }
-                ],
-                tips: [
-                    "Vorgangspassiv: werden + Partizip II",
-                    "Zustandspassiv: sein + Partizip II",
-                    "Im Perfekt: ist ... worden (nicht: geworden)"
-                ]
-            },
-            relativsätze: {
-                title: "Relativsätze - Personen & Dinge beschreiben",
-                explanation: "Relativsätze geben zusätzliche Informationen zu einem Nomen.",
-                table: [
-                    { kasus: "Nominativ", maskulin: "der", feminin: "die", neutral: "das", plural: "die" },
-                    { kasus: "Akkusativ", maskulin: "den", feminin: "die", neutral: "das", plural: "die" },
-                    { kasus: "Dativ", maskulin: "dem", feminin: "der", neutral: "dem", plural: "denen" }
-                ],
-                tips: [
-                    "Das Relativpronomen richtet sich nach dem Bezugswort",
-                    "Der Kasus richtet sich nach der Funktion im Nebensatz",
-                    "Das Verb steht am Ende des Relativsatzes"
-                ]
-            },
-            konnektoren: {
-                title: "Konnektoren - Sätze verbinden",
-                explanation: "Konnektoren verbinden Haupt- und Nebensätze.",
-                table: [
-                    { typ: "Grund", hauptsatz: "denn, nämlich", nebensatz: "weil, da" },
-                    { typ: "Gegensatz", hauptsatz: "aber, jedoch", nebensatz: "obwohl" },
-                    { typ: "Bedingung", hauptsatz: "-", nebensatz: "wenn, falls" },
-                    { typ: "Zeit", hauptsatz: "dann, danach", nebensatz: "als, wenn, nachdem" }
-                ],
-                tips: [
-                    "Bei Nebensätzen: Verb am Ende",
-                    "Bei Hauptsätzen: normale Wortstellung",
-                    "Adverbien (deshalb, trotzdem): Verb auf Position 2"
-                ]
-            },
-            präpositionen: {
-                title: "Präpositionen mit Kasus",
-                explanation: "Präpositionen verlangen einen bestimmten Kasus.",
-                table: [
-                    { kasus: "Akkusativ", präpositionen: "für, gegen, ohne, um, durch, bis" },
-                    { kasus: "Dativ", präpositionen: "aus, bei, mit, nach, seit, von, zu" },
-                    { kasus: "Wechselpräp.", präpositionen: "an, auf, in, über, unter, vor, zwischen" }
-                ],
-                tips: [
-                    "Wechselpräpositionen: Wohin? → Akkusativ / Wo? → Dativ",
-                    "Verschmelzungen: an dem → am, in dem → im, zu der → zur"
-                ]
-            }
+            konjunktivII: { title: "Konjunktiv II - Irreale Wünsche & Höflichkeit", explanation: "Der Konjunktiv II drückt irreale Situationen, Wünsche und höfliche Bitten aus.", table: [ { infinitiv: "sein", präteritum: "war", konjunktivII: "wäre", beispiel: "Wenn ich reich wäre..." }, { infinitiv: "haben", präteritum: "hatte", konjunktivII: "hätte", beispiel: "Ich hätte gern einen Kaffee." }, { infinitiv: "können", präteritum: "konnte", konjunktivII: "könnte", beispiel: "Könnten Sie mir helfen?" }, { infinitiv: "müssen", präteritum: "musste", konjunktivII: "müsste", beispiel: "Ich müsste mehr lernen." }, { infinitiv: "werden", präteritum: "wurde", konjunktivII: "würde", beispiel: "Ich würde gern kommen." } ], tips: ["würde + Infinitiv: bei den meisten Verben", "Bei sein, haben und Modalverben: eigene Konjunktiv-II-Form", "Höfliche Bitten: Könnten Sie...? / Würden Sie...?"] },
+            passiv: { title: "Passiv - Vorgangs- und Zustandspassiv", explanation: "Das Passiv betont die Handlung, nicht den Handelnden.", table: [ { zeit: "Präsens", aktiv: "Man baut das Haus.", passiv: "Das Haus wird gebaut." }, { zeit: "Präteritum", aktiv: "Man baute das Haus.", passiv: "Das Haus wurde gebaut." }, { zeit: "Perfekt", aktiv: "Man hat das Haus gebaut.", passiv: "Das Haus ist gebaut worden." }, { zeit: "Zustandspassiv", aktiv: "-", passiv: "Das Haus ist gebaut." } ], tips: ["Vorgangspassiv: werden + Partizip II", "Zustandspassiv: sein + Partizip II", "Im Perfekt: ist ... worden (nicht: geworden)"] },
+            relativsätze: { title: "Relativsätze - Personen & Dinge beschreiben", explanation: "Relativsätze geben zusätzliche Informationen zu einem Nomen.", table: [ { kasus: "Nominativ", maskulin: "der", feminin: "die", neutral: "das", plural: "die" }, { kasus: "Akkusativ", maskulin: "den", feminin: "die", neutral: "das", plural: "die" }, { kasus: "Dativ", maskulin: "dem", feminin: "der", neutral: "dem", plural: "denen" } ], tips: ["Das Relativpronomen richtet sich nach dem Bezugswort", "Der Kasus richtet sich nach der Funktion im Nebensatz", "Das Verb steht am Ende des Relativsatzes"] },
+            konnektoren: { title: "Konnektoren - Sätze verbinden", explanation: "Konnektoren verbinden Haupt- und Nebensätze.", table: [ { typ: "Grund", hauptsatz: "denn, nämlich", nebensatz: "weil, da" }, { typ: "Gegensatz", hauptsatz: "aber, jedoch", nebensatz: "obwohl" }, { typ: "Bedingung", hauptsatz: "-", nebensatz: "wenn, falls" }, { typ: "Zeit", hauptsatz: "dann, danach", nebensatz: "als, wenn, nachdem" } ], tips: ["Bei Nebensätzen: Verb am Ende", "Bei Hauptsätzen: normale Wortstellung", "Adverbien (deshalb, trotzdem): Verb auf Position 2"] },
+            präpositionen: { title: "Präpositionen mit Kasus", explanation: "Präpositionen verlangen einen bestimmten Kasus.", table: [ { kasus: "Akkusativ", präpositionen: "für, gegen, ohne, um, durch, bis" }, { kasus: "Dativ", präpositionen: "aus, bei, mit, nach, seit, von, zu" }, { kasus: "Wechselpräp.", präpositionen: "an, auf, in, über, unter, vor, zwischen" } ], tips: ["Wechselpräpositionen: Wohin? → Akkusativ / Wo? → Dativ", "Verschmelzungen: an dem → am, in dem → im, zu der → zur"] }
         };
 
         const readingQuestions = [
-            {
-                type: "reading",
-                context: "Sehr geehrte Damen und Herren, ich möchte mich hiermit für die Stelle als Softwareentwickler bewerben. Ich habe drei Jahre Erfahrung in der Webentwicklung und beherrsche JavaScript, Python und Java. Zurzeit arbeite ich bei einer kleinen Firma, aber ich suche neue Herausforderungen. Über eine Einladung zum Vorstellungsgespräch würde ich mich sehr freuen.",
-                question: "Warum bewirbt sich die Person für eine neue Stelle?",
-                options: ["Sie ist arbeitslos.", "Sie sucht neue Herausforderungen.", "Ihre Firma ist zu groß.", "Sie möchte weniger arbeiten."],
-                correct: 1,
-                explanation: "Im Text steht: 'ich suche neue Herausforderungen.'"
-            },
-            {
-                type: "reading",
-                context: "Hinweis an alle Mieter: Ab dem 1. April wird die Heizung abgestellt. Bei Fragen wenden Sie sich bitte an die Hausverwaltung. Die Mülltonnen werden jeden Dienstag und Freitag geleert. Bitte stellen Sie Ihren Müll bis 7 Uhr morgens vor das Haus.",
-                question: "Wann muss der Müll vor dem Haus stehen?",
-                options: ["Am Abend vorher", "Bis 7 Uhr morgens", "Um 12 Uhr mittags", "Wenn die Müllabfuhr kommt"],
-                correct: 1,
-                explanation: "Im Text steht: 'Bitte stellen Sie Ihren Müll bis 7 Uhr morgens vor das Haus.'"
-            },
-            {
-                type: "reading",
-                context: "Die Bibliothek ist montags bis freitags von 9 bis 18 Uhr geöffnet, samstags von 10 bis 14 Uhr. An Feiertagen bleibt die Bibliothek geschlossen. Bücher können für maximal vier Wochen ausgeliehen werden.",
-                question: "Wie lange kann man Bücher normalerweise ausleihen?",
-                options: ["Zwei Wochen", "Drei Wochen", "Vier Wochen", "Unbegrenzt"],
-                correct: 2,
-                explanation: "Im Text steht: 'Bücher können für maximal vier Wochen ausgeliehen werden.'"
-            },
-            {
-                type: "reading",
-                context: "Liebe Nachbarn, am Samstag, den 15. März, feiere ich meinen 30. Geburtstag. Die Party beginnt um 20 Uhr und kann bis Mitternacht dauern. Ich entschuldige mich im Voraus für möglichen Lärm. Bei Beschwerden erreichen Sie mich unter 0170-1234567.",
-                question: "Bis wann kann die Party dauern?",
-                options: ["20 Uhr", "22 Uhr", "Mitternacht", "3 Uhr morgens"],
-                correct: 2,
-                explanation: "Im Text steht: 'Die Party kann bis Mitternacht dauern.'"
-            }
+            { type: "reading", context: "Sehr geehrte Damen und Herren, ich möchte mich hiermit für die Stelle als Softwareentwickler bewerben. Ich habe drei Jahre Erfahrung in der Webentwicklung und beherrsche JavaScript, Python und Java. Zurzeit arbeite ich bei einer kleinen Firma, aber ich suche neue Herausforderungen. Über eine Einladung zum Vorstellungsgespräch würde ich mich sehr freuen.", question: "Warum bewirbt sich die Person für eine neue Stelle?", options: ["Sie ist arbeitslos.", "Sie sucht neue Herausforderungen.", "Ihre Firma ist zu groß.", "Sie möchte weniger arbeiten."], correct: 1, explanation: "Im Text steht: 'ich suche neue Herausforderungen.'" },
+            { type: "reading", context: "Hinweis an alle Mieter: Ab dem 1. April wird die Heizung abgestellt. Bei Fragen wenden Sie sich bitte an die Hausverwaltung. Die Mülltonnen werden jeden Dienstag und Freitag geleert. Bitte stellen Sie Ihren Müll bis 7 Uhr morgens vor das Haus.", question: "Wann muss der Müll vor dem Haus stehen?", options: ["Am Abend vorher", "Bis 7 Uhr morgens", "Um 12 Uhr mittags", "Wenn die Müllabfuhr kommt"], correct: 1, explanation: "Im Text steht: 'Bitte stellen Sie Ihren Müll bis 7 Uhr morgens vor das Haus.'" },
+            { type: "reading", context: "Die Bibliothek ist montags bis freitags von 9 bis 18 Uhr geöffnet, samstags von 10 bis 14 Uhr. An Feiertagen bleibt die Bibliothek geschlossen. Bücher können für maximal vier Wochen ausgeliehen werden.", question: "Wie lange kann man Bücher normalerweise ausleihen?", options: ["Zwei Wochen", "Drei Wochen", "Vier Wochen", "Unbegrenzt"], correct: 2, explanation: "Im Text steht: 'Bücher können für maximal vier Wochen ausgeliehen werden.'" },
+            { type: "reading", context: "Liebe Nachbarn, am Samstag, den 15. März, feiere ich meinen 30. Geburtstag. Die Party beginnt um 20 Uhr und kann bis Mitternacht dauern. Ich entschuldige mich im Voraus für möglichen Lärm. Bei Beschwerden erreichen Sie mich unter 0170-1234567.", question: "Bis wann kann die Party dauern?", options: ["20 Uhr", "22 Uhr", "Mitternacht", "3 Uhr morgens"], correct: 2, explanation: "Im Text steht: 'Die Party kann bis Mitternacht dauern.'" }
         ];
 
         const grammarQuestions = [
-            {
-                type: "grammar",
-                question: "Ergänze: 'Wenn ich reich ____, würde ich eine Weltreise machen.'",
-                options: ["bin", "wäre", "war", "sei"],
-                correct: 1,
-                explanation: "Konjunktiv II von 'sein' ist 'wäre' - irrealer Wunsch."
-            },
-            {
-                type: "grammar",
-                question: "Wähle richtig: 'Das ist der Mann, ____ ich gestern getroffen habe.'",
-                options: ["der", "den", "dem", "dessen"],
-                correct: 1,
-                explanation: "'Den' ist Akkusativ maskulin. 'Treffen' braucht Akkusativ."
-            },
-            {
-                type: "grammar",
-                question: "Welcher Satz ist korrekt?",
-                options: [
-                    "Ich habe das Buch gelesen, weil es interessant war.",
-                    "Ich habe das Buch gelesen, weil war es interessant.",
-                    "Ich habe das Buch gelesen, weil es war interessant.",
-                    "Ich habe gelesen das Buch, weil es interessant war."
-                ],
-                correct: 0,
-                explanation: "In Nebensätzen mit 'weil' steht das Verb am Ende."
-            },
-            {
-                type: "grammar",
-                question: "Ergänze: 'Das Haus ____ letztes Jahr gebaut.'",
-                options: ["hat", "wurde", "ist", "wird"],
-                correct: 1,
-                explanation: "Passiv Präteritum: wurde + Partizip II."
-            },
-            {
-                type: "grammar",
-                question: "Welche Präposition? 'Ich warte ____ den Bus.'",
-                options: ["für", "auf", "an", "nach"],
-                correct: 1,
-                explanation: "'Warten auf' + Akkusativ."
-            },
-            {
-                type: "grammar",
-                question: "Ergänze: '____ ich in Berlin war, habe ich das Brandenburger Tor besucht.'",
-                options: ["Wenn", "Als", "Weil", "Obwohl"],
-                correct: 1,
-                explanation: "'Als' für einmalige Ereignisse in der Vergangenheit."
-            },
-            {
-                type: "grammar",
-                question: "Richtig ist: 'Die Frau, ____ Tasche gestohlen wurde, rief die Polizei.'",
-                options: ["die", "der", "deren", "dessen"],
-                correct: 2,
-                explanation: "'Deren' ist Genitiv feminin für Besitz."
-            }
+            { type: "grammar", question: "Ergänze: 'Wenn ich reich ____, würde ich eine Weltreise machen.'", options: ["bin", "wäre", "war", "sei"], correct: 1, explanation: "Konjunktiv II von 'sein' ist 'wäre' - irrealer Wunsch." },
+            { type: "grammar", question: "Wähle richtig: 'Das ist der Mann, ____ ich gestern getroffen habe.'", options: ["der", "den", "dem", "dessen"], correct: 1, explanation: "'Den' ist Akkusativ maskulin. 'Treffen' braucht Akkusativ." },
+            { type: "grammar", question: "Welcher Satz ist korrekt?", options: ["Ich habe das Buch gelesen, weil es interessant war.", "Ich habe das Buch gelesen, weil war es interessant.", "Ich habe das Buch gelesen, weil es war interessant.", "Ich habe gelesen das Buch, weil es interessant war."], correct: 0, explanation: "In Nebensätzen mit 'weil' steht das Verb am Ende." },
+            { type: "grammar", question: "Ergänze: 'Das Haus ____ letztes Jahr gebaut.'", options: ["hat", "wurde", "ist", "wird"], correct: 1, explanation: "Passiv Präteritum: wurde + Partizip II." },
+            { type: "grammar", question: "Welche Präposition? 'Ich warte ____ den Bus.'", options: ["für", "auf", "an", "nach"], correct: 1, explanation: "'Warten auf' + Akkusativ." },
+            { type: "grammar", question: "Ergänze: '____ ich in Berlin war, habe ich das Brandenburger Tor besucht.'", options: ["Wenn", "Als", "Weil", "Obwohl"], correct: 1, explanation: "'Als' für einmalige Ereignisse in der Vergangenheit." },
+            { type: "grammar", question: "Richtig ist: 'Die Frau, ____ Tasche gestohlen wurde, rief die Polizei.'", options: ["die", "der", "deren", "dessen"], correct: 2, explanation: "'Deren' ist Genitiv feminin für Besitz." }
         ];
 
         const writingPrompts = [
-            {
-                title: "Brief an den Vermieter",
-                situation: "In Ihrer Wohnung ist die Heizung kaputt. Schreiben Sie einen Brief an Ihren Vermieter.",
-                points: ["Beschreiben Sie das Problem", "Seit wann besteht das Problem", "Bitten Sie um schnelle Reparatur"],
-                example: "Sehr geehrter Herr Müller,\n\nleider muss ich Ihnen mitteilen, dass seit letzter Woche die Heizung in meiner Wohnung nicht mehr funktioniert. Es ist sehr kalt und ich bitte Sie, das Problem so schnell wie möglich zu beheben.\n\nMit freundlichen Grüßen"
-            },
-            {
-                title: "E-Mail zur Kursanmeldung",
-                situation: "Sie möchten sich für einen Deutschkurs anmelden. Schreiben Sie eine E-Mail.",
-                points: ["Stellen Sie sich vor", "Fragen Sie nach Terminen und Preisen", "Fragen Sie nach dem Kursniveau"],
-                example: "Sehr geehrte Damen und Herren,\n\nmein Name ist [Name] und ich interessiere mich für einen Deutschkurs. Könnten Sie mir bitte Informationen zu den Kursterminen und Preisen schicken? Ich habe bereits B1-Niveau.\n\nMit freundlichen Grüßen"
-            },
-            {
-                title: "Beschwerde über Lärm",
-                situation: "Ihre Nachbarn machen nachts sehr viel Lärm. Schreiben Sie einen Brief.",
-                points: ["Beschreiben Sie das Problem", "Erklären Sie die Auswirkungen", "Bitten Sie um eine Lösung"],
-                example: "Sehr geehrte Nachbarn,\n\nich schreibe Ihnen, weil ich nachts oft durch laute Musik gestört werde. Ich muss früh aufstehen und kann deshalb nicht gut schlafen. Könnten Sie bitte nach 22 Uhr leiser sein?\n\nMit freundlichen Grüßen"
-            }
+            { title: "Brief an den Vermieter", situation: "In Ihrer Wohnung ist die Heizung kaputt. Schreiben Sie einen Brief an Ihren Vermieter.", points: ["Beschreiben Sie das Problem", "Seit wann besteht das Problem", "Bitten Sie um schnelle Reparatur"], example: "Sehr geehrter Herr Müller,\n\nleider muss ich Ihnen mitteilen, dass seit letzter Woche die Heizung in meiner Wohnung nicht mehr funktioniert. Es ist sehr kalt und ich bitte Sie, das Problem so schnell wie möglich zu beheben.\n\nMit freundlichen Grüßen" },
+            { title: "E-Mail zur Kursanmeldung", situation: "Sie möchten sich für einen Deutschkurs anmelden. Schreiben Sie eine E-Mail.", points: ["Stellen Sie sich vor", "Fragen Sie nach Terminen und Preisen", "Fragen Sie nach dem Kursniveau"], example: "Sehr geehrte Damen und Herren,\n\nmein Name ist [Name] und ich interessiere mich für einen Deutschkurs. Könnten Sie mir bitte Informationen zu den Kursterminen und Preisen schicken? Ich habe bereits B1-Niveau.\n\nMit freundlichen Grüßen" },
+            { title: "Beschwerde über Lärm", situation: "Ihre Nachbarn machen nachts sehr viel Lärm. Schreiben Sie einen Brief.", points: ["Beschreiben Sie das Problem", "Erklären Sie die Auswirkungen", "Bitten Sie um eine Lösung"], example: "Sehr geehrte Nachbarn,\n\nich schreibe Ihnen, weil ich nachts oft durch laute Musik gestört werde. Ich muss früh aufstehen und kann deshalb nicht gut schlafen. Könnten Sie bitte nach 22 Uhr leiser sein?\n\nMit freundlichen Grüßen" }
         ];
 
-        const speakingPrompts = [
-            {
-                title: "Über sich selbst sprechen",
-                situation: "Stellen Sie sich vor: Name, Herkunft, Beruf, Familie, Hobbys.",
-                tips: ["Sprechen Sie in ganzen Sätzen", "Benutzen Sie verschiedene Verben", "Nennen Sie konkrete Details"],
-                example: "Ich heiße... und komme aus... Ich wohne seit... Jahren in Deutschland. Ich arbeite als... In meiner Freizeit..."
-            },
-            {
-                title: "Ein Bild beschreiben",
-                situation: "Sie sehen ein Foto von einem Markt. Beschreiben Sie, was Sie sehen.",
-                tips: ["Beginnen Sie mit dem Überblick", "Beschreiben Sie Details", "Vermuten Sie: 'Vielleicht...', 'Es könnte sein, dass...'"],
-                example: "Auf dem Bild sehe ich einen Markt. Im Vordergrund stehen Menschen, die Obst kaufen. Links sieht man..."
-            },
-            {
-                title: "Meinung äußern",
-                situation: "Was denken Sie: Sollten Kinder Handys haben?",
-                tips: ["Drücken Sie Ihre Meinung klar aus", "Geben Sie Gründe", "Nennen Sie auch Gegenargumente"],
-                example: "Meiner Meinung nach sollten Kinder erst ab... Ein Vorteil ist... Aber andererseits..."
-            }
+        // ==================== ENHANCED SPEAKING DATA ====================
+        const speakingTasks = [
+            { type: "free", title: "Sich vorstellen", task: "Stellen Sie sich vor: Sagen Sie Ihren Namen, woher Sie kommen, was Sie beruflich machen und warum Sie Deutsch lernen.", expectedWords: ["heiße", "name", "komme", "aus", "wohne", "arbeite", "lerne", "deutsch", "berlin", "deutschland", "pakistan", "seit", "jahre"], tips: ["Sprechen Sie in ganzen Sätzen", "Nennen Sie konkrete Details", "Benutzen Sie 'Ich heiße...', 'Ich komme aus...', 'Ich arbeite als...'"], minWords: 20 },
+            { type: "free", title: "Tagesablauf beschreiben", task: "Beschreiben Sie einen typischen Tag in Ihrem Leben. Was machen Sie morgens, mittags und abends?", expectedWords: ["morgens", "aufstehen", "frühstück", "arbeite", "mittags", "esse", "abends", "schlafe", "uhr", "dann", "danach", "zuerst"], tips: ["Benutzen Sie Zeitangaben", "Verwenden Sie Konnektoren: dann, danach, später", "Beschreiben Sie Aktivitäten"], minWords: 25 },
+            { type: "free", title: "Über Familie sprechen", task: "Erzählen Sie über Ihre Familie. Wer gehört zu Ihrer Familie und was machen diese Personen?", expectedWords: ["familie", "mutter", "vater", "bruder", "schwester", "kind", "kinder", "eltern", "verheiratet", "mann", "frau", "wohnt", "arbeitet"], tips: ["Nennen Sie Familienmitglieder", "Beschreiben Sie, was sie machen", "Sagen Sie, wo sie wohnen"], minWords: 20 },
+            { type: "free", title: "Wohnung beschreiben", task: "Beschreiben Sie Ihre Wohnung oder Ihr Haus. Wie viele Zimmer haben Sie? Was gefällt Ihnen?", expectedWords: ["wohnung", "zimmer", "küche", "bad", "schlafzimmer", "wohnzimmer", "balkon", "groß", "klein", "hell", "gefällt", "liegt"], tips: ["Nennen Sie die Räume", "Beschreiben Sie Größe und Lage", "Sagen Sie, was Ihnen gefällt"], minWords: 20 },
+            { type: "free", title: "Urlaub planen", task: "Sie möchten Urlaub machen. Wohin möchten Sie fahren und warum? Was möchten Sie dort machen?", expectedWords: ["urlaub", "fahren", "reisen", "möchte", "würde", "strand", "berge", "meer", "besichtigen", "sehen", "weil", "wetter"], tips: ["Benutzen Sie Konjunktiv: 'Ich würde gern...'", "Nennen Sie Gründe mit 'weil'", "Beschreiben Sie Aktivitäten"], minWords: 20 }
         ];
 
-        // ==================== INIT ====================
-        function init() {
-            updateStatsDisplay();
-            renderVocabulary();
-            renderGrammarTopics();
-            setupNavigation();
+        const repeatWords = [
+            { word: "Entschuldigung", translation: "excuse me / sorry" },
+            { word: "Vorstellungsgespräch", translation: "job interview" },
+            { word: "Aufenthaltserlaubnis", translation: "residence permit" },
+            { word: "Krankenversicherung", translation: "health insurance" },
+            { word: "Sehenswürdigkeiten", translation: "sights / attractions" },
+            { word: "Geschwindigkeitsbegrenzung", translation: "speed limit" },
+            { word: "Einbürgerung", translation: "naturalization" },
+            { word: "Bescheinigung", translation: "certificate" },
+            { word: "Verantwortung", translation: "responsibility" },
+            { word: "Gelegenheit", translation: "opportunity" },
+            { word: "Zusammenarbeit", translation: "cooperation" },
+            { word: "Staatsangehörigkeit", translation: "citizenship/nationality" }
+        ];
+
+        const repeatSentences = [
+            { sentence: "Ich möchte einen Termin vereinbaren.", translation: "I would like to make an appointment." },
+            { sentence: "Könnten Sie mir bitte helfen?", translation: "Could you please help me?" },
+            { sentence: "Das habe ich leider nicht verstanden.", translation: "I unfortunately didn't understand that." },
+            { sentence: "Wo muss ich mich anmelden?", translation: "Where do I need to register?" },
+            { sentence: "Ich hätte gern eine Auskunft.", translation: "I would like some information." },
+            { sentence: "Das ist mir leider nicht möglich.", translation: "Unfortunately, that is not possible for me." },
+            { sentence: "Würden Sie das bitte wiederholen?", translation: "Would you please repeat that?" },
+            { sentence: "Ich bin seit drei Jahren in Deutschland.", translation: "I have been in Germany for three years." }
+        ];
+
+        // ==================== SPEECH RECOGNITION ====================
+        function initSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) { speechSupported = false; return; }
+            
+            speechSupported = true;
+            recognition = new SpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'de-DE';
+            
+            recognition.onresult = (event) => {
+                interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) { finalTranscript += event.results[i][0].transcript + ' '; }
+                    else { interimTranscript += event.results[i][0].transcript; }
+                }
+                updateTranscriptDisplay();
+            };
+            
+            recognition.onerror = (event) => { if (event.error === 'no-speech' && isRecording) { try { recognition.start(); } catch(e) {} } };
+            recognition.onend = () => { if (isRecording) { try { recognition.start(); } catch(e) {} } };
         }
+
+        function updateTranscriptDisplay() {
+            const el = document.getElementById('transcriptText');
+            if (el) { el.innerHTML = (finalTranscript + '<span class="interim">' + interimTranscript + '</span>') || '<span class="placeholder">Sprich jetzt...</span>'; el.classList.remove('placeholder'); }
+        }
+
+        function startRecording() {
+            if (!speechSupported || !recognition) return;
+            finalTranscript = ''; interimTranscript = ''; isRecording = true;
+            try { recognition.start(); } catch(e) {}
+            const btn = document.getElementById('micButton'), status = document.getElementById('micStatus');
+            if (btn) btn.classList.add('recording');
+            if (status) { status.textContent = '🔴 Aufnahme läuft... Tippe zum Stoppen'; status.classList.add('recording'); }
+        }
+
+        function stopRecording() {
+            if (!recognition) return;
+            isRecording = false; recognition.stop();
+            const btn = document.getElementById('micButton'), status = document.getElementById('micStatus');
+            if (btn) btn.classList.remove('recording');
+            if (status) { status.textContent = 'Tippe auf das Mikrofon zum Sprechen'; status.classList.remove('recording'); }
+        }
+
+        function toggleRecording() { isRecording ? stopRecording() : startRecording(); }
+
+        // ==================== SPEAKING ANALYSIS ====================
+        function analyzeSpokenText(spokenText, task) {
+            const spoken = spokenText.toLowerCase().trim();
+            const words = spoken.split(/\s+/).filter(w => w.length > 0);
+            const foundWords = [], missingWords = [];
+            
+            task.expectedWords.forEach(expected => {
+                if (spoken.includes(expected.toLowerCase())) foundWords.push(expected);
+                else missingWords.push(expected);
+            });
+            
+            const wordCountScore = Math.min(100, (words.length / task.minWords) * 50);
+            const keywordScore = (foundWords.length / task.expectedWords.length) * 50;
+            const totalScore = Math.round(wordCountScore + keywordScore);
+            
+            return { score: totalScore, wordCount: words.length, minWords: task.minWords, foundWords, missingWords, feedback: generateFeedback(totalScore, words.length, task.minWords, foundWords, missingWords) };
+        }
+
+        function generateFeedback(score, wordCount, minWords, foundWords, missingWords) {
+            const feedback = { positive: [], suggestions: [] };
+            if (wordCount >= minWords) feedback.positive.push(`✓ Gute Länge: ${wordCount} Wörter gesprochen`);
+            else feedback.suggestions.push(`Versuche mehr zu sagen (${wordCount}/${minWords} Wörter)`);
+            if (foundWords.length > 0) feedback.positive.push(`✓ Wichtige Wörter benutzt: ${foundWords.slice(0, 3).join(', ')}${foundWords.length > 3 ? '...' : ''}`);
+            if (missingWords.length > 0 && missingWords.length <= 5) feedback.suggestions.push(`Diese Wörter könntest du einbauen: ${missingWords.slice(0, 3).join(', ')}`);
+            if (score >= 80) feedback.positive.push('✓ Ausgezeichnet! Sehr gut strukturiert.');
+            else if (score >= 60) feedback.positive.push('✓ Gut gemacht! Weiter üben.');
+            return feedback;
+        }
+
+        function compareWords(spoken, expected) {
+            const spokenClean = spoken.toLowerCase().trim().replace(/[.,!?]/g, '');
+            const expectedClean = expected.toLowerCase().trim();
+            if (spokenClean === expectedClean) return { match: true, score: 100 };
+            if (spokenClean.includes(expectedClean) || expectedClean.includes(spokenClean)) return { match: true, score: 80 };
+            const maxLen = Math.max(spokenClean.length, expectedClean.length);
+            let matches = 0;
+            for (let i = 0; i < Math.min(spokenClean.length, expectedClean.length); i++) { if (spokenClean[i] === expectedClean[i]) matches++; }
+            const similarity = (matches / maxLen) * 100;
+            return { match: similarity >= 60, score: Math.round(similarity) };
+        }
+
+        // ==================== SPEAKING UI ====================
+        let currentSpeakingMode = null, currentSpeakingTask = null, currentRepeatIndex = 0, repeatItems = [], speakingCorrect = 0;
+
+        function showSpeakingModeSelector() {
+            const container = document.getElementById('speakingContainer');
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizContent').classList.add('hidden');
+            document.getElementById('writingContainer').classList.add('hidden');
+            container.classList.remove('hidden');
+            
+            if (!speechSupported) {
+                container.innerHTML = `<div class="speech-not-supported"><p style="font-size:2rem;margin-bottom:1rem">🎤</p><p><strong>Spracherkennung nicht verfügbar</strong></p><p style="margin-top:0.5rem;font-size:0.9rem">Dein Browser unterstützt keine Spracherkennung. Bitte verwende Chrome, Edge oder Safari.</p></div><div class="btn-row" style="margin-top:1.5rem"><button class="btn btn-secondary" onclick="goToDashboard()">Zurück</button></div>`;
+                return;
+            }
+            
+            container.innerHTML = `
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title">🗣️ Sprechen üben</h3></div>
+                    <p style="color:var(--text-secondary);margin-bottom:1.5rem">Wähle einen Übungsmodus:</p>
+                    <div class="speaking-mode-selector">
+                        <div class="speaking-mode-card" onclick="startSpeakingMode('free')">
+                            <div class="speaking-mode-icon">💬</div>
+                            <div class="speaking-mode-title">Freies Sprechen</div>
+                            <div class="speaking-mode-desc">Beantworte Fragen zu Themen</div>
+                        </div>
+                        <div class="speaking-mode-card" onclick="startSpeakingMode('repeat')">
+                            <div class="speaking-mode-icon">🔄</div>
+                            <div class="speaking-mode-title">Nachsprechen</div>
+                            <div class="speaking-mode-desc">Wörter & Sätze wiederholen</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tips-box">
+                    <div class="tips-title">💡 Tipps für die Sprachprüfung</div>
+                    <ul class="tips-list">
+                        <li>Sprich deutlich und nicht zu schnell</li>
+                        <li>Benutze vollständige Sätze</li>
+                        <li>Verwende Konnektoren: und, aber, weil, deshalb</li>
+                        <li>Keine Angst vor Fehlern - weitersprechen!</li>
+                    </ul>
+                </div>
+                <div class="btn-row"><button class="btn btn-secondary" onclick="goToDashboard()">Zurück</button></div>
+            `;
+        }
+
+        function startSpeakingMode(mode) {
+            currentSpeakingMode = mode;
+            if (mode === 'free') startFreeSpeaking();
+            else if (mode === 'repeat') startRepeatMode();
+        }
+
+        function startFreeSpeaking() {
+            currentSpeakingTask = speakingTasks[Math.floor(Math.random() * speakingTasks.length)];
+            showFreeSpeakingTask();
+        }
+
+        function showFreeSpeakingTask() {
+            const container = document.getElementById('speakingContainer');
+            const task = currentSpeakingTask;
+            
+            container.innerHTML = `
+                <button class="back-btn" onclick="showSpeakingModeSelector()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Zurück zur Auswahl</button>
+                <div class="speaking-task-card">
+                    <div class="speaking-task-number">AUFGABE: ${task.title}</div>
+                    <div class="speaking-task-text">${task.task}</div>
+                </div>
+                <div class="tips-box" style="margin-bottom:1rem">
+                    <div class="tips-title">💡 Tipps</div>
+                    <ul class="tips-list">${task.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+                </div>
+                <div class="mic-container">
+                    <button class="mic-button" id="micButton" onclick="toggleRecording()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                    <div class="mic-status" id="micStatus">Tippe auf das Mikrofon zum Sprechen</div>
+                </div>
+                <div class="transcript-box">
+                    <div class="transcript-label">Deine Antwort:</div>
+                    <div class="transcript-text placeholder" id="transcriptText">Hier erscheint, was du sagst...</div>
+                </div>
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="showFreeSpeakingTask()">Neue Aufgabe</button>
+                    <button class="btn btn-primary" onclick="analyzeFreeResponse()">Auswerten</button>
+                </div>
+            `;
+        }
+
+        function analyzeFreeResponse() {
+            stopRecording();
+            if (!finalTranscript.trim()) { alert('Bitte sprich zuerst etwas!'); return; }
+            const analysis = analyzeSpokenText(finalTranscript, currentSpeakingTask);
+            showFreeResults(analysis);
+            stats.skills.speaking = Math.min(100, (stats.skills.speaking || 0) + Math.round(analysis.score / 10));
+            stats.score += Math.round(analysis.score / 5);
+            saveStats();
+        }
+
+        function showFreeResults(analysis) {
+            const container = document.getElementById('speakingContainer');
+            const scoreClass = analysis.score >= 70 ? 'good' : analysis.score >= 50 ? 'medium' : 'poor';
+            
+            container.innerHTML = `
+                <div class="feedback-box">
+                    <div class="feedback-header">
+                        <div class="feedback-title">📊 Auswertung</div>
+                        <div class="feedback-score ${scoreClass}">${analysis.score}%</div>
+                    </div>
+                    <div class="feedback-section">
+                        <div class="feedback-section-title">Was gut war:</div>
+                        ${analysis.feedback.positive.map(p => `<div class="feedback-item positive">${p}</div>`).join('')}
+                    </div>
+                    ${analysis.feedback.suggestions.length > 0 ? `<div class="feedback-section"><div class="feedback-section-title">Verbesserungsvorschläge:</div>${analysis.feedback.suggestions.map(s => `<div class="feedback-item suggestion">💡 ${s}</div>`).join('')}</div>` : ''}
+                    <div class="feedback-section">
+                        <div class="feedback-section-title">Erwartete Schlüsselwörter:</div>
+                        <div class="word-chips">${currentSpeakingTask.expectedWords.map(w => `<span class="word-chip ${analysis.foundWords.includes(w) ? 'found' : 'missing'}">${w}</span>`).join('')}</div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top:1rem">
+                    <div class="card-header"><h3 class="card-title">Deine Antwort</h3></div>
+                    <p style="color:var(--text-secondary);line-height:1.6">${finalTranscript || 'Keine Aufnahme'}</p>
+                </div>
+                <div class="btn-row">
+                    <button class="btn btn-secondary" onclick="showSpeakingModeSelector()">Zurück</button>
+                    <button class="btn btn-primary" onclick="startFreeSpeaking()">Nächste Aufgabe</button>
+                </div>
+            `;
+        }
+
+        // ==================== REPEAT MODE ====================
+        function startRepeatMode() {
+            repeatItems = shuffleArray([...repeatWords.slice(0, 6).map(w => ({ type: 'word', ...w })), ...repeatSentences.slice(0, 4).map(s => ({ type: 'sentence', word: s.sentence, translation: s.translation }))]);
+            currentRepeatIndex = 0; speakingCorrect = 0;
+            showRepeatTask();
+        }
+
+        function showRepeatTask() {
+            const container = document.getElementById('speakingContainer');
+            const item = repeatItems[currentRepeatIndex];
+            
+            container.innerHTML = `
+                <button class="back-btn" onclick="showSpeakingModeSelector()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Zurück zur Auswahl</button>
+                <div class="speaking-progress">${repeatItems.map((_, i) => `<div class="speaking-progress-dot ${i < currentRepeatIndex ? 'completed' : i === currentRepeatIndex ? 'current' : ''}"></div>`).join('')}</div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">${item.type === 'word' ? '🔤 Wort' : '📝 Satz'} nachsprechen</h3>
+                        <span class="card-badge">${currentRepeatIndex + 1} / ${repeatItems.length}</span>
+                    </div>
+                    <div class="repeat-word-display">
+                        <div class="repeat-word-main">${item.word}</div>
+                        <div class="repeat-word-translation">${item.translation}</div>
+                    </div>
+                </div>
+                <div class="mic-container">
+                    <button class="mic-button" id="micButton" onclick="toggleRecording()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                    <div class="mic-status" id="micStatus">Tippe und sprich: "${item.word}"</div>
+                </div>
+                <div class="transcript-box">
+                    <div class="transcript-label">Du hast gesagt:</div>
+                    <div class="transcript-text placeholder" id="transcriptText">...</div>
+                </div>
+                <div id="comparisonResult"></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="checkRepeatAnswer()">Überprüfen</button></div>
+            `;
+        }
+
+        function checkRepeatAnswer() {
+            stopRecording();
+            const item = repeatItems[currentRepeatIndex];
+            const comparison = compareWords(finalTranscript, item.word);
+            const resultDiv = document.getElementById('comparisonResult');
+            
+            if (comparison.match) {
+                speakingCorrect++;
+                resultDiv.innerHTML = `<div class="comparison-result correct"><span class="comparison-result-icon">✓</span><span class="comparison-result-text">Richtig! (${comparison.score}% Übereinstimmung)</span></div>`;
+            } else {
+                resultDiv.innerHTML = `<div class="comparison-result incorrect"><span class="comparison-result-icon">✗</span><span class="comparison-result-text">Versuche es nochmal</span></div>`;
+            }
+            
+            document.querySelector('.btn-row').innerHTML = `<button class="btn btn-secondary" onclick="retryRepeat()">Nochmal</button><button class="btn btn-primary" onclick="nextRepeatTask()">Weiter</button>`;
+        }
+
+        function retryRepeat() {
+            finalTranscript = '';
+            document.getElementById('transcriptText').innerHTML = '...';
+            document.getElementById('comparisonResult').innerHTML = '';
+            document.querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="checkRepeatAnswer()">Überprüfen</button>`;
+        }
+
+        function nextRepeatTask() {
+            currentRepeatIndex++; finalTranscript = '';
+            if (currentRepeatIndex >= repeatItems.length) showRepeatResults();
+            else showRepeatTask();
+        }
+
+        function showRepeatResults() {
+            const container = document.getElementById('speakingContainer');
+            const percent = Math.round((speakingCorrect / repeatItems.length) * 100);
+            
+            stats.skills.speaking = Math.min(100, (stats.skills.speaking || 0) + Math.round(percent / 10));
+            stats.score += speakingCorrect * 5;
+            saveStats();
+            
+            container.innerHTML = `
+                <div class="results-container">
+                    <div class="results-score-circle" style="--score-percent: ${percent}%">
+                        <div class="results-score-inner">
+                            <div class="results-score-value">${percent}%</div>
+                            <div class="results-score-label">Richtig</div>
+                        </div>
+                    </div>
+                    <h2 class="results-title">${percent >= 70 ? 'Super! 🎉' : percent >= 50 ? 'Gut gemacht! 👍' : 'Weiter üben! 💪'}</h2>
+                    <p class="results-message">${speakingCorrect} von ${repeatItems.length} richtig nachgesprochen</p>
+                    <div class="btn-row">
+                        <button class="btn btn-secondary" onclick="showSpeakingModeSelector()">Zurück</button>
+                        <button class="btn btn-primary" onclick="startRepeatMode()">Nochmal</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== CORE FUNCTIONS ====================
+        function shuffleArray(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+        function init() { initSpeechRecognition(); updateStatsDisplay(); renderVocabulary(); renderGrammarTopics(); setupNavigation(); }
 
         function setupNavigation() {
             document.querySelectorAll('.nav-tab').forEach(tab => {
@@ -1359,168 +900,61 @@
         function updateStatsDisplay() {
             document.getElementById('totalScore').textContent = stats.score;
             document.getElementById('streakCount').textContent = stats.streak + ' 🔥';
-            
-            const skills = stats.skills;
             ['reading', 'listening', 'writing', 'speaking'].forEach(skill => {
-                const val = Math.min(100, skills[skill] || 0);
-                const elem = document.getElementById(skill + 'Progress');
-                const bar = document.getElementById(skill + 'Bar');
+                const val = Math.min(100, stats.skills[skill] || 0);
+                const elem = document.getElementById(skill + 'Progress'), bar = document.getElementById(skill + 'Bar');
                 if (elem) elem.textContent = val + '%';
                 if (bar) bar.style.width = val + '%';
             });
         }
 
-        function saveStats() {
-            localStorage.setItem('b1Stats', JSON.stringify(stats));
-            updateStatsDisplay();
-        }
+        function saveStats() { localStorage.setItem('b1Stats', JSON.stringify(stats)); updateStatsDisplay(); }
 
-        // ==================== VOCABULARY ====================
         function renderVocabulary() {
             const categories = [...new Set(vocabulary.map(v => v.category))];
             const filter = document.getElementById('vocabFilter');
-            
-            filter.innerHTML = `<button class="category-btn active" data-cat="all">Alle</button>` +
-                categories.map(c => `<button class="category-btn" data-cat="${c}">${c}</button>`).join('');
-            
-            filter.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filter.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    renderVocabCards(btn.dataset.cat);
-                });
-            });
-            
+            filter.innerHTML = `<button class="category-btn active" data-cat="all">Alle</button>` + categories.map(c => `<button class="category-btn" data-cat="${c}">${c}</button>`).join('');
+            filter.querySelectorAll('.category-btn').forEach(btn => { btn.addEventListener('click', () => { filter.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderVocabCards(btn.dataset.cat); }); });
             renderVocabCards('all');
         }
 
         function renderVocabCards(category) {
             const filtered = category === 'all' ? vocabulary : vocabulary.filter(v => v.category === category);
-            const grid = document.getElementById('vocabGrid');
-            
-            grid.innerHTML = filtered.map((v, i) => `
-                <div class="vocab-card" onclick="flipCard(this)" data-index="${i}">
-                    <div class="vocab-front">
-                        <div class="vocab-article">${v.article}</div>
-                        <div class="vocab-word">${v.word.replace(v.article + ' ', '')}</div>
-                    </div>
-                    <div class="vocab-back hidden">
-                        <div class="vocab-translation">${v.translation}</div>
-                        <div class="vocab-example">${v.example}</div>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('vocabGrid').innerHTML = filtered.map((v, i) => `<div class="vocab-card" onclick="flipCard(this)" data-index="${i}"><div class="vocab-front"><div class="vocab-article">${v.article}</div><div class="vocab-word">${v.word.replace(v.article + ' ', '')}</div></div><div class="vocab-back hidden"><div class="vocab-translation">${v.translation}</div><div class="vocab-example">${v.example}</div></div></div>`).join('');
         }
 
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-            card.querySelector('.vocab-front').classList.toggle('hidden');
-            card.querySelector('.vocab-back').classList.toggle('hidden');
-        }
+        function flipCard(card) { card.classList.toggle('flipped'); card.querySelector('.vocab-front').classList.toggle('hidden'); card.querySelector('.vocab-back').classList.toggle('hidden'); }
 
-        // ==================== GRAMMAR ====================
         function renderGrammarTopics() {
-            const container = document.getElementById('grammarTopics');
-            const topics = Object.keys(grammarData);
-            
-            container.innerHTML = topics.map(key => `
-                <div class="grammar-topic" onclick="showGrammarDetail('${key}')">
-                    <div>
-                        <div class="grammar-topic-title">${grammarData[key].title.split(' - ')[0]}</div>
-                        <div class="grammar-topic-desc">${grammarData[key].title.split(' - ')[1] || ''}</div>
-                    </div>
-                    <span class="grammar-topic-arrow">→</span>
-                </div>
-            `).join('');
+            document.getElementById('grammarTopics').innerHTML = Object.keys(grammarData).map(key => `<div class="grammar-topic" onclick="showGrammarDetail('${key}')"><div><div class="grammar-topic-title">${grammarData[key].title.split(' - ')[0]}</div><div class="grammar-topic-desc">${grammarData[key].title.split(' - ')[1] || ''}</div></div><span class="grammar-topic-arrow">→</span></div>`).join('');
         }
 
         function showGrammarDetail(topic) {
             const data = grammarData[topic];
-            const detail = document.getElementById('grammarDetail');
-            const list = document.getElementById('grammarList');
-            
             let tableHTML = '';
-            if (topic === 'konjunktivII') {
-                tableHTML = `<table class="grammar-table"><thead><tr><th>Infinitiv</th><th>Präteritum</th><th>Konjunktiv II</th><th>Beispiel</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.infinitiv}</td><td>${r.präteritum}</td><td style="color:var(--accent-gold);font-weight:600">${r.konjunktivII}</td><td style="font-style:italic">${r.beispiel}</td></tr>`).join('')}</tbody></table>`;
-            } else if (topic === 'passiv') {
-                tableHTML = `<table class="grammar-table"><thead><tr><th>Zeit</th><th>Aktiv</th><th>Passiv</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.zeit}</td><td>${r.aktiv}</td><td style="color:var(--accent-gold)">${r.passiv}</td></tr>`).join('')}</tbody></table>`;
-            } else if (topic === 'relativsätze') {
-                tableHTML = `<table class="grammar-table"><thead><tr><th>Kasus</th><th>Mask.</th><th>Fem.</th><th>Neutr.</th><th>Plural</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.kasus}</td><td>${r.maskulin}</td><td>${r.feminin}</td><td>${r.neutral}</td><td>${r.plural}</td></tr>`).join('')}</tbody></table>`;
-            } else if (topic === 'konnektoren') {
-                tableHTML = `<table class="grammar-table"><thead><tr><th>Typ</th><th>Hauptsatz</th><th>Nebensatz</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.typ}</td><td>${r.hauptsatz || '-'}</td><td style="color:var(--accent-gold)">${r.nebensatz}</td></tr>`).join('')}</tbody></table>`;
-            } else if (topic === 'präpositionen') {
-                tableHTML = `<table class="grammar-table"><thead><tr><th>Kasus</th><th>Präpositionen</th></tr></thead><tbody>${data.table.map(r => `<tr><td style="color:var(--accent-gold);font-weight:600">${r.kasus}</td><td>${r.präpositionen}</td></tr>`).join('')}</tbody></table>`;
-            }
+            if (topic === 'konjunktivII') tableHTML = `<table class="grammar-table"><thead><tr><th>Infinitiv</th><th>Präteritum</th><th>Konj. II</th><th>Beispiel</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.infinitiv}</td><td>${r.präteritum}</td><td style="color:var(--accent-gold);font-weight:600">${r.konjunktivII}</td><td style="font-style:italic;font-size:0.8rem">${r.beispiel}</td></tr>`).join('')}</tbody></table>`;
+            else if (topic === 'passiv') tableHTML = `<table class="grammar-table"><thead><tr><th>Zeit</th><th>Aktiv</th><th>Passiv</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.zeit}</td><td>${r.aktiv}</td><td style="color:var(--accent-gold)">${r.passiv}</td></tr>`).join('')}</tbody></table>`;
+            else if (topic === 'relativsätze') tableHTML = `<table class="grammar-table"><thead><tr><th>Kasus</th><th>M</th><th>F</th><th>N</th><th>Pl</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.kasus}</td><td>${r.maskulin}</td><td>${r.feminin}</td><td>${r.neutral}</td><td>${r.plural}</td></tr>`).join('')}</tbody></table>`;
+            else if (topic === 'konnektoren') tableHTML = `<table class="grammar-table"><thead><tr><th>Typ</th><th>Hauptsatz</th><th>Nebensatz</th></tr></thead><tbody>${data.table.map(r => `<tr><td>${r.typ}</td><td>${r.hauptsatz || '-'}</td><td style="color:var(--accent-gold)">${r.nebensatz}</td></tr>`).join('')}</tbody></table>`;
+            else if (topic === 'präpositionen') tableHTML = `<table class="grammar-table"><thead><tr><th>Kasus</th><th>Präpositionen</th></tr></thead><tbody>${data.table.map(r => `<tr><td style="color:var(--accent-gold);font-weight:600">${r.kasus}</td><td>${r.präpositionen}</td></tr>`).join('')}</tbody></table>`;
             
-            detail.innerHTML = `
-                <button class="back-btn" onclick="hideGrammarDetail()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="19" y1="12" x2="5" y2="12"/>
-                        <polyline points="12 19 5 12 12 5"/>
-                    </svg>
-                    Zurück
-                </button>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">${data.title}</h3>
-                    </div>
-                    <p style="color:var(--text-secondary);margin-bottom:1rem;line-height:1.6">${data.explanation}</p>
-                    ${tableHTML}
-                    <div class="tips-box" style="margin-top:1rem">
-                        <div class="tips-title">💡 Tipps</div>
-                        <ul class="tips-list">${data.tips.map(t => `<li>${t}</li>`).join('')}</ul>
-                    </div>
-                    <button class="btn btn-primary" style="margin-top:1rem" onclick="startGrammarPractice()">
-                        Übungen starten
-                    </button>
-                </div>
-            `;
-            
-            list.classList.add('hidden');
-            detail.classList.remove('hidden');
+            document.getElementById('grammarDetail').innerHTML = `<button class="back-btn" onclick="hideGrammarDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Zurück</button><div class="card"><div class="card-header"><h3 class="card-title">${data.title}</h3></div><p style="color:var(--text-secondary);margin-bottom:1rem;line-height:1.6">${data.explanation}</p>${tableHTML}<div class="tips-box" style="margin-top:1rem"><div class="tips-title">💡 Tipps</div><ul class="tips-list">${data.tips.map(t => `<li>${t}</li>`).join('')}</ul></div><button class="btn btn-primary" style="margin-top:1rem" onclick="startGrammarPractice()">Übungen starten</button></div>`;
+            document.getElementById('grammarList').classList.add('hidden');
+            document.getElementById('grammarDetail').classList.remove('hidden');
         }
 
-        function hideGrammarDetail() {
-            document.getElementById('grammarList').classList.remove('hidden');
-            document.getElementById('grammarDetail').classList.add('hidden');
-        }
+        function hideGrammarDetail() { document.getElementById('grammarList').classList.remove('hidden'); document.getElementById('grammarDetail').classList.add('hidden'); }
 
-        // ==================== QUIZ ====================
-        function shuffleArray(arr) {
-            const a = [...arr];
-            for (let i = a.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [a[i], a[j]] = [a[j], a[i]];
-            }
-            return a;
-        }
-
-        function startMixedPractice() {
-            currentSkill = 'mixed';
-            currentQuestions = shuffleArray([...readingQuestions, ...grammarQuestions]).slice(0, 8);
-            startQuiz();
-        }
+        function startMixedPractice() { currentSkill = 'mixed'; currentQuestions = shuffleArray([...readingQuestions, ...grammarQuestions]).slice(0, 8); startQuiz(); }
 
         function startPractice(skill) {
-            goToSection('practice');
-            currentSkill = skill;
-            
-            if (skill === 'reading' || skill === 'listening') {
-                currentQuestions = shuffleArray([...readingQuestions]).slice(0, 4);
-                startQuiz();
-            } else if (skill === 'writing') {
-                showWritingExercise();
-            } else if (skill === 'speaking') {
-                showSpeakingExercise();
-            }
+            goToSection('practice'); currentSkill = skill;
+            if (skill === 'reading' || skill === 'listening') { currentQuestions = shuffleArray([...readingQuestions]).slice(0, 4); startQuiz(); }
+            else if (skill === 'writing') showWritingExercise();
+            else if (skill === 'speaking') showSpeakingModeSelector();
         }
 
-        function startGrammarPractice() {
-            goToSection('practice');
-            currentSkill = 'grammar';
-            currentQuestions = shuffleArray([...grammarQuestions]).slice(0, 5);
-            startQuiz();
-        }
+        function startGrammarPractice() { goToSection('practice'); currentSkill = 'grammar'; currentQuestions = shuffleArray([...grammarQuestions]).slice(0, 5); startQuiz(); }
 
         function goToSection(section) {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -1530,60 +964,31 @@
         }
 
         function startQuiz() {
-            currentQuestionIndex = 0;
-            correctAnswers = 0;
-            totalQuestions = currentQuestions.length;
-            selectedAnswer = null;
-            timeRemaining = 600;
-
+            currentQuestionIndex = 0; correctAnswers = 0; totalQuestions = currentQuestions.length; selectedAnswer = null; timeRemaining = 600;
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('quizContent').classList.remove('hidden');
             document.getElementById('resultsContainer').classList.add('hidden');
             document.getElementById('writingContainer').classList.add('hidden');
             document.getElementById('speakingContainer').classList.add('hidden');
-
-            startTimer();
-            showQuestion();
+            startTimer(); showQuestion();
         }
 
         function startTimer() {
             clearInterval(timerInterval);
             timerInterval = setInterval(() => {
                 timeRemaining--;
-                const mins = Math.floor(timeRemaining / 60);
-                const secs = timeRemaining % 60;
-                const display = document.getElementById('timerDisplay');
-                display.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-                
-                if (timeRemaining <= 60) {
-                    document.getElementById('quizTimer').classList.add('warning');
-                }
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    showResults();
-                }
+                document.getElementById('timerDisplay').textContent = `${Math.floor(timeRemaining / 60)}:${(timeRemaining % 60).toString().padStart(2, '0')}`;
+                if (timeRemaining <= 60) document.getElementById('quizTimer').classList.add('warning');
+                if (timeRemaining <= 0) { clearInterval(timerInterval); showResults(); }
             }, 1000);
         }
 
         function showQuestion() {
             const q = currentQuestions[currentQuestionIndex];
-            const container = document.getElementById('questionContainer');
-            const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
-            document.getElementById('quizProgressFill').style.width = progress + '%';
-            
-            let html = '';
-            if (q.context) {
-                html += `<div class="quiz-context">${q.context}</div>`;
-            }
-            html += `<div class="quiz-question">${q.question}</div>`;
-            html += `<div class="quiz-options">`;
-            q.options.forEach((opt, i) => {
-                html += `<div class="quiz-option" onclick="selectAnswer(${i})">${opt}</div>`;
-            });
-            html += `</div>`;
-            
-            container.innerHTML = html;
+            document.getElementById('quizProgressFill').style.width = ((currentQuestionIndex + 1) / totalQuestions * 100) + '%';
+            let html = q.context ? `<div class="quiz-context">${q.context}</div>` : '';
+            html += `<div class="quiz-question">${q.question}</div><div class="quiz-options">${q.options.map((opt, i) => `<div class="quiz-option" onclick="selectAnswer(${i})">${opt}</div>`).join('')}</div>`;
+            document.getElementById('questionContainer').innerHTML = html;
             selectedAnswer = null;
             document.getElementById('nextBtn').classList.add('hidden');
         }
@@ -1591,82 +996,29 @@
         function selectAnswer(index) {
             if (selectedAnswer !== null) return;
             selectedAnswer = index;
-            
             const q = currentQuestions[currentQuestionIndex];
-            const options = document.querySelectorAll('.quiz-option');
-            
-            options.forEach((opt, i) => {
-                if (i === q.correct) {
-                    opt.classList.add('correct');
-                } else if (i === index && index !== q.correct) {
-                    opt.classList.add('incorrect');
-                }
-            });
-            
-            if (index === q.correct) {
-                correctAnswers++;
-                stats.score += 10;
-            }
-            
-            const container = document.getElementById('questionContainer');
-            container.innerHTML += `<div class="quiz-explanation">💡 ${q.explanation}</div>`;
-            
+            document.querySelectorAll('.quiz-option').forEach((opt, i) => { if (i === q.correct) opt.classList.add('correct'); else if (i === index && index !== q.correct) opt.classList.add('incorrect'); });
+            if (index === q.correct) { correctAnswers++; stats.score += 10; }
+            document.getElementById('questionContainer').innerHTML += `<div class="quiz-explanation">💡 ${q.explanation}</div>`;
             document.getElementById('nextBtn').classList.remove('hidden');
         }
 
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex >= totalQuestions) {
-                showResults();
-            } else {
-                showQuestion();
-            }
-        }
+        function nextQuestion() { currentQuestionIndex++; if (currentQuestionIndex >= totalQuestions) showResults(); else showQuestion(); }
 
         function showResults() {
             clearInterval(timerInterval);
-            
             const percent = Math.round((correctAnswers / totalQuestions) * 100);
-            
-            // Update skill progress
-            if (currentSkill !== 'mixed') {
-                stats.skills[currentSkill] = Math.min(100, (stats.skills[currentSkill] || 0) + Math.round(percent / 5));
-            } else {
-                ['reading', 'listening'].forEach(s => {
-                    stats.skills[s] = Math.min(100, (stats.skills[s] || 0) + Math.round(percent / 10));
-                });
-            }
-            
-            // Update streak
+            if (currentSkill !== 'mixed') stats.skills[currentSkill] = Math.min(100, (stats.skills[currentSkill] || 0) + Math.round(percent / 5));
+            else ['reading', 'listening'].forEach(s => { stats.skills[s] = Math.min(100, (stats.skills[s] || 0) + Math.round(percent / 10)); });
             const today = new Date().toDateString();
-            if (stats.lastDate !== today) {
-                stats.streak = stats.lastDate === new Date(Date.now() - 86400000).toDateString() ? stats.streak + 1 : 1;
-                stats.lastDate = today;
-            }
-            
+            if (stats.lastDate !== today) { stats.streak = stats.lastDate === new Date(Date.now() - 86400000).toDateString() ? stats.streak + 1 : 1; stats.lastDate = today; }
             saveStats();
-            
             document.getElementById('quizContent').classList.add('hidden');
             document.getElementById('resultsContainer').classList.remove('hidden');
-            
-            const circle = document.getElementById('resultsCircle');
-            circle.style.setProperty('--score-percent', percent + '%');
+            document.getElementById('resultsCircle').style.setProperty('--score-percent', percent + '%');
             document.getElementById('resultsScore').textContent = percent + '%';
-            
-            let title, message;
-            if (percent >= 80) {
-                title = 'Ausgezeichnet! 🎉';
-                message = 'Du bist bestens vorbereitet!';
-            } else if (percent >= 60) {
-                title = 'Gut gemacht! 👍';
-                message = 'Weiter so, du machst Fortschritte!';
-            } else {
-                title = 'Weiter üben! 💪';
-                message = 'Übung macht den Meister.';
-            }
-            
-            document.getElementById('resultsTitle').textContent = title;
-            document.getElementById('resultsMessage').textContent = message;
+            document.getElementById('resultsTitle').textContent = percent >= 80 ? 'Ausgezeichnet! 🎉' : percent >= 60 ? 'Gut gemacht! 👍' : 'Weiter üben! 💪';
+            document.getElementById('resultsMessage').textContent = percent >= 80 ? 'Du bist bestens vorbereitet!' : percent >= 60 ? 'Weiter so!' : 'Übung macht den Meister.';
         }
 
         function goToDashboard() {
@@ -1674,79 +1026,23 @@
             document.getElementById('startScreen').classList.remove('hidden');
             document.getElementById('quizContent').classList.add('hidden');
             document.getElementById('resultsContainer').classList.add('hidden');
+            document.getElementById('speakingContainer').classList.add('hidden');
+            document.getElementById('writingContainer').classList.add('hidden');
+            stopRecording();
         }
 
-        // ==================== WRITING ====================
         function showWritingExercise() {
             const prompt = writingPrompts[Math.floor(Math.random() * writingPrompts.length)];
             const container = document.getElementById('writingContainer');
-            
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('quizContent').classList.add('hidden');
+            document.getElementById('speakingContainer').classList.add('hidden');
             container.classList.remove('hidden');
-            
-            container.innerHTML = `
-                <div class="prompt-card">
-                    <div class="prompt-type">Schreibaufgabe</div>
-                    <div class="prompt-title">${prompt.title}</div>
-                    <p class="prompt-text">${prompt.situation}</p>
-                    <div class="tips-box">
-                        <div class="tips-title">📝 Punkte</div>
-                        <ul class="tips-list">${prompt.points.map(p => `<li>${p}</li>`).join('')}</ul>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Beispielantwort</h3>
-                    </div>
-                    <p style="white-space:pre-line;color:var(--text-secondary);line-height:1.7;font-size:0.95rem">${prompt.example}</p>
-                </div>
-                <div class="btn-row">
-                    <button class="btn btn-secondary" onclick="goToDashboard()">Zurück</button>
-                    <button class="btn btn-primary" onclick="showWritingExercise()">Nächste Aufgabe</button>
-                </div>
-            `;
-            
+            container.innerHTML = `<div class="prompt-card"><div class="prompt-type">Schreibaufgabe</div><div class="prompt-title">${prompt.title}</div><p class="prompt-text">${prompt.situation}</p><div class="tips-box"><div class="tips-title">📝 Punkte</div><ul class="tips-list">${prompt.points.map(p => `<li>${p}</li>`).join('')}</ul></div></div><div class="card"><div class="card-header"><h3 class="card-title">Beispielantwort</h3></div><p style="white-space:pre-line;color:var(--text-secondary);line-height:1.7;font-size:0.95rem">${prompt.example}</p></div><div class="btn-row"><button class="btn btn-secondary" onclick="goToDashboard()">Zurück</button><button class="btn btn-primary" onclick="showWritingExercise()">Nächste Aufgabe</button></div>`;
             stats.skills.writing = Math.min(100, (stats.skills.writing || 0) + 5);
             saveStats();
         }
 
-        // ==================== SPEAKING ====================
-        function showSpeakingExercise() {
-            const prompt = speakingPrompts[Math.floor(Math.random() * speakingPrompts.length)];
-            const container = document.getElementById('speakingContainer');
-            
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('quizContent').classList.add('hidden');
-            container.classList.remove('hidden');
-            
-            container.innerHTML = `
-                <div class="prompt-card">
-                    <div class="prompt-type">Sprechübung</div>
-                    <div class="prompt-title">${prompt.title}</div>
-                    <p class="prompt-text">${prompt.situation}</p>
-                    <div class="tips-box">
-                        <div class="tips-title">💬 Tipps</div>
-                        <ul class="tips-list">${prompt.tips.map(t => `<li>${t}</li>`).join('')}</ul>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Redemittel</h3>
-                    </div>
-                    <p style="color:var(--text-secondary);line-height:1.7;font-size:0.95rem;font-style:italic">${prompt.example}</p>
-                </div>
-                <div class="btn-row">
-                    <button class="btn btn-secondary" onclick="goToDashboard()">Zurück</button>
-                    <button class="btn btn-primary" onclick="showSpeakingExercise()">Nächste Aufgabe</button>
-                </div>
-            `;
-            
-            stats.skills.speaking = Math.min(100, (stats.skills.speaking || 0) + 5);
-            saveStats();
-        }
-
-        // ==================== START ====================
         init();
     </script>
 </body>
